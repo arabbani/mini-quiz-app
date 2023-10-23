@@ -1,7 +1,7 @@
-<div class="pt-5 h-100 d-flex flex-column">
-  <div class="gap-2 d-flex justify-content-end">
-    <button class="btn btn-outline-secondary" (click)="gotoPreviousQuestion()" [disabled]="currentQuestionNumber === 1">Previous</button>
-    <button class="btn btn-outline-secondary" (click)="gotoNextQuestion()" [disabled]="currentQuestionNumber === numberOfQuestions">Next</button>
-  </div>
+<div class="pt-5 h-75 d-flex flex-column justify-content-center">
   <router-outlet></router-outlet>
+  <div class="gap-3 d-flex justify-content-center mt-4">
+    <button class="btn btn-outline-secondary" (click)="gotoNextQuestion()" [disabled]="isNextButtonActive()">Next</button>
+    <button class="btn btn-outline-secondary">Submit</button>
+  </div>
 </div>

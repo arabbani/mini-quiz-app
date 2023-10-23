@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { QuizService } from './quiz.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GameService } from './game.service';
 
 @Component({
   selector: 'app-quiz',
@@ -8,34 +9,30 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./quiz.component.scss'],
 })
 export class QuizComponent {
-  numberOfQuestions: number;
-  currentQuestionNumber: number;
 
   constructor(
     private readonly quizService: QuizService,
+    private readonly gameService: GameService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
   ) {
-    this.numberOfQuestions = quizService.numberOfQuestions;
-    this.currentQuestionNumber = quizService.currentQuestionNumber;
 
     if (!route.firstChild) {
       this.loadQuestion();
     }
   }
 
-  gotoPreviousQuestion() {
-    this.quizService.currentQuestionNumber = --this.currentQuestionNumber;
-    this.loadQuestion();
+  isNextButtonActive() {
+    return this.quizService.numberOfQuestions > this.gameService.currentQuestionNumber;
   }
 
   gotoNextQuestion() {
-    this.quizService.currentQuestionNumber = ++this.currentQuestionNumber;
+    this.gameService.currentQuestionNumber++;
     this.loadQuestion();
   }
 
   loadQuestion() {
-    this.router.navigate([this.currentQuestionNumber], {
+    this.router.navigate([this.gameService.currentQuestionNumber], {
       relativeTo: this.route,
     });
   }

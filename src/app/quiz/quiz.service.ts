@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-type QuizQuestion = {
+export type QuizQuestion = {
   question: string,
   options: string[],
   answer: string
@@ -40,20 +40,8 @@ export class QuizService {
     },
   ];
 
-  _currentQuestionNumber: number = 1;
-
-  constructor() {}
-
   get numberOfQuestions() {
     return this.questions.length;
-  }
-
-  get currentQuestionNumber() {
-    return this._currentQuestionNumber;
-  }
-
-  set currentQuestionNumber(questionNumber: number) {
-    this._currentQuestionNumber = questionNumber;
   }
 
   getQuestions() {
