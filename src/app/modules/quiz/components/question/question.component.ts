@@ -27,6 +27,6 @@ export class QuestionComponent implements OnInit {
 
   handleOptionCLick(event: any) {
     this.answer = event.target.value;
-    this.gameService.verifyUserResponse(this.answer);
+    this.gameService.setUserResponse(this.answer);
   }
 }

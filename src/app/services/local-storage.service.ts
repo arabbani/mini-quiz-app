@@ -5,16 +5,17 @@ import { Injectable } from '@angular/core';
 })
 export class LocalStorageService {
 
-  readonly storageKeyName = 'apsstrQuizApp';
+  readonly storageKeyName = 'apsstrQuizApp-';
 
   constructor() { }
 
   get(key: string) {
-    const value = localStorage.getItem(key) || '';
-    return JSON.parse(value);
+    const value = localStorage.getItem(this.storageKeyName + key);
+    return value ? JSON.parse(value) : null;
   }
 
-  set(key: string, value: unknown) {
-    return JSON.stringify(value);
+  set(key: string, value: any) {
+    localStorage.setItem(this.storageKeyName + key, JSON.stringify(value));
+    ;
   }
 }

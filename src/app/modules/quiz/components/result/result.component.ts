@@ -17,12 +17,16 @@ export class ResultComponent {
     private readonly gameService: GameService,
     private readonly router: Router
   ) {
-    this.score = this.gameService.score;
+    this.score = gameService.score;
     this.totalScore = quizService.numberOfQuestions;
+
+    if (gameService.numberOfQuestionsAttempted < quizService.numberOfQuestions) {
+      router.navigate(['/quiz']);
+    }
   }
 
   startQuiz() {
     this.gameService.resetGameData();
-    this.router.navigate(['quiz']);
+    this.router.navigate(['/quiz']);
   }
 }

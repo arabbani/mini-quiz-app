@@ -6,7 +6,8 @@ type GameData = {
   currentQuestionNumber: number,
   currectAnswerCount: number,
   currentQuestion: QuizQuestion | undefined,
-  selectedOptionForCurrentQuestion: string
+  selectedOptionForCurrentQuestion: string,
+  numberOfQuestionsAttempted: number
 };
 
 @Injectable({
@@ -18,7 +19,8 @@ export class GameService {
     currentQuestionNumber: 1,
     currectAnswerCount: 0,
     currentQuestion: undefined,
-    selectedOptionForCurrentQuestion: ''
+    selectedOptionForCurrentQuestion: '',
+    numberOfQuestionsAttempted: 0,
   };
 
   constructor(private readonly quizService: QuizService, private readonly localStorageService: LocalStorageService) {
@@ -40,30 +42,16 @@ export class GameService {
     return this._gameData.selectedOptionForCurrentQuestion;
   }
 
-  resetGameData(data: GameData = {
-    currentQuestionNumber: 1,
-    currectAnswerCount: 0,
-    currentQuestion: undefined,
-    selectedOptionForCurrentQuestion: ''
-  }) {
-    this._gameData = data;
+  get numberOfQuestionsAttempted() {
+    return this._gameData.numberOfQuestionsAttempted;
   }
 
   loadQuestion(questionNumber: number) {
     if (!this._gameData.currentQuestion) {
       this._gameData.currentQuestion = this.quizService.getQuestion(questionNumber - 1);
+      this.saveDataToLocalStorage();
     }
     return this._gameData.currentQuestion;
-  }
-
-  resetAnswer() {
-    const data = {
-      ...this._gameData,
-      currentQuestion: undefined,
-      selectedOptionForCurrentQuestion: ''
-    };
-
-    this.resetGameData(data);
   }
 
   selectNextQuestion() {
@@ -72,11 +60,52 @@ export class GameService {
     }
   }
 
-  verifyUserResponse(selectedOption: string) {
+  setUserResponse(selectedOption: string) {
     this._gameData.selectedOptionForCurrentQuestion = selectedOption;
+  }
 
-    if (selectedOption === this._gameData.currentQuestion?.answer) {
+  verifyUserResponse() {
+    this._gameData.numberOfQuestionsAttempted++;
+
+    if (this._gameData.selectedOptionForCurrentQuestion === this._gameData.currentQuestion?.answer) {
       this._gameData.currectAnswerCount++;
     }
+
+    this.saveDataToLocalStorage();
+  }
+
+  resetAnswer() {
+    const data = {
+      ...this._gameData,
+      currentQuestion: undefined,
+      selectedOptionForCurrentQuestion: ''
+    };
+    this.resetGameData(data);
+  }
+
+  resetGameData(data: GameData = {
+    currentQuestionNumber: 1,
+    currectAnswerCount: 0,
+    currentQuestion: undefined,
+    selectedOptionForCurrentQuestion: '',
+    numberOfQuestionsAttempted: 0,
+  }) {
+    this._gameData = data;
+    this.saveDataToLocalStorage();
+  }
+
+  retrieveDataFromLocalStorage() {
+    const savedData = this.localStorageService.get('game-data');
+    this.resetGameData(savedData || {
+      currentQuestionNumber: 1,
+      currectAnswerCount: 0,
+      currentQuestion: undefined,
+      selectedOptionForCurrentQuestion: '',
+      numberOfQuestionsAttempted: 0,
+    });
+  }
+
+  private saveDataToLocalStorage() {
+    this.localStorageService.set('game-data', this._gameData);
   }
 }

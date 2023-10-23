@@ -26,10 +26,6 @@ export class GameComponent {
     return !!this.gameService.selectedOption;
   }
 
-  gotoNextQuestion() {
-    this.gameService.selectNextQuestion();
-    this.loadQuestion();
-  }
 
   loadQuestion() {
     this.router.navigate([this.gameService.currentQuestionNumber], {
@@ -37,7 +33,22 @@ export class GameComponent {
     });
   }
 
-  submitQuiz() {
+  submitAnswer() {
+    this.gameService.verifyUserResponse();
+
+    if (this.isCurrentQuestionIsTheLastQuestion()) {
+      this.submitQuiz();
+    } else {
+      this.gotoNextQuestion();
+    }
+  }
+
+  private gotoNextQuestion() {
+    this.gameService.selectNextQuestion();
+    this.loadQuestion();
+  }
+
+  private submitQuiz() {
     this.router.navigate(['result'], {
       relativeTo: this.route,
     });
