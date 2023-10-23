@@ -3,14 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import { QuizRoutingModule } from './quiz-routing.module';
 import { QuizComponent } from './quiz.component';
-import { QuestionComponent } from './question/question.component';
+import { QuestionComponent } from './components/question/question.component';
 import { FormsModule } from '@angular/forms';
+import { GameComponent } from './components/game/game.component';
 
 
 @NgModule({
   declarations: [
     QuizComponent,
-    QuestionComponent
+    QuestionComponent,
+    GameComponent
   ],
   imports: [
     CommonModule,

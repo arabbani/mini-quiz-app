@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GameService } from '../game.service';
-import { QuizQuestion } from '../quiz.service';
+import { GameService } from '../../services/game.service';
+import { QuizQuestion } from '../../services/quiz.service';
 
 @Component({
   selector: 'app-question',

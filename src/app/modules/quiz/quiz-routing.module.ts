@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { QuizComponent } from './quiz.component';
-import { QuestionComponent } from './question/question.component';
+import { QuestionComponent } from './components/question/question.component';
+import { GameComponent } from './components/game/game.component';
 
 const routes: Routes = [
   {
@@ -9,8 +10,14 @@ const routes: Routes = [
     component: QuizComponent,
     children: [
       {
-        path: ':questionNumber',
-        component: QuestionComponent
+        path: '',
+        component: GameComponent,
+        children: [
+          {
+            path: ':questionNumber',
+            component: QuestionComponent
+          }
+        ]
       }
     ]
   }

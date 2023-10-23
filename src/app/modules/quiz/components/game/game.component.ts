@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GameService } from './game.service';
+import { GameService } from '../../services/game.service';
 
 @Component({
-  selector: 'app-quiz',
-  templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.scss'],
+  selector: 'app-game',
+  templateUrl: './game.component.html',
+  styleUrls: ['./game.component.scss'],
 })
-export class QuizComponent {
+export class GameComponent {
   constructor(
     private readonly gameService: GameService,
     private readonly router: Router,
@@ -38,6 +38,8 @@ export class QuizComponent {
   }
 
   submitQuiz() {
-
+    this.router.navigate(['result'], {
+      relativeTo: this.route,
+    });
   }
 }
