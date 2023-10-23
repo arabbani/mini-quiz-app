@@ -1,7 +1,7 @@
-<div class="pt-5 h-75 d-flex flex-column justify-content-center">
+<div class="h-75 d-flex flex-column justify-content-center">
   <router-outlet></router-outlet>
   <div class="gap-3 d-flex justify-content-center mt-4">
-    <button *ngIf="!isCurrentQuestionIsTheLastQuestion()" class="btn btn-outline-secondary" (click)="gotoNextQuestion()" [disabled]="!isAnswerSubmitButtonActive()">Next</button>
-    <button *ngIf="isCurrentQuestionIsTheLastQuestion()" class="btn btn-outline-primary" [disabled]="!isAnswerSubmitButtonActive()" (click)="submitQuiz()">Submit</button>
+    <button *ngIf="!isCurrentQuestionIsTheLastQuestion()" class="btn btn-secondary" (click)="gotoNextQuestion()" [disabled]="!isAnswerSubmitButtonActive()">Next</button>
+    <button *ngIf="isCurrentQuestionIsTheLastQuestion()" class="btn btn-primary" [disabled]="!isAnswerSubmitButtonActive()" (click)="submitQuiz()">Submit</button>
   </div>
 </div>

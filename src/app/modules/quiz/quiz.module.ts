@@ -6,13 +6,15 @@ import { QuizComponent } from './quiz.component';
 import { QuestionComponent } from './components/question/question.component';
 import { FormsModule } from '@angular/forms';
 import { GameComponent } from './components/game/game.component';
+import { ResultComponent } from './components/result/result.component';
 
 
 @NgModule({
   declarations: [
     QuizComponent,
     QuestionComponent,
-    GameComponent
+    GameComponent,
+    ResultComponent
   ],
   imports: [
     CommonModule,

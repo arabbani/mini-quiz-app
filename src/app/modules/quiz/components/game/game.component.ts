@@ -23,7 +23,7 @@ export class GameComponent {
   }
 
   isAnswerSubmitButtonActive() {
-    return !!this.gameService.selectedOptionForCurrentQuestion;
+    return !!this.gameService.selectedOption;
   }
 
   gotoNextQuestion() {

@@ -1,14 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { QuizComponent } from './quiz.component';
-import { QuestionComponent } from './components/question/question.component';
 import { GameComponent } from './components/game/game.component';
+import { QuestionComponent } from './components/question/question.component';
+import { ResultComponent } from './components/result/result.component';
+import { QuizComponent } from './quiz.component';
 
 const routes: Routes = [
   {
     path: '',
     component: QuizComponent,
     children: [
+      {
+        path: 'result',
+        component: ResultComponent
+      },
       {
         path: '',
         component: GameComponent,
