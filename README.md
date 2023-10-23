@@ -1,6 +1,6 @@
 # Quizo
 
-Website: (https://mini-quiz-app-jade.vercel.app/).
+Website: https://mini-quiz-app-jade.vercel.app/
 
 ## Development server
 
