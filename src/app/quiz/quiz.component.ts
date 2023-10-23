@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { QuizService } from './quiz.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameService } from './game.service';
 
@@ -9,25 +8,26 @@ import { GameService } from './game.service';
   styleUrls: ['./quiz.component.scss'],
 })
 export class QuizComponent {
-
   constructor(
-    private readonly quizService: QuizService,
     private readonly gameService: GameService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
   ) {
-
     if (!route.firstChild) {
       this.loadQuestion();
     }
   }
 
-  isNextButtonActive() {
-    return this.quizService.numberOfQuestions > this.gameService.currentQuestionNumber;
+  isCurrentQuestionIsTheLastQuestion() {
+    return !this.gameService.currentQuestionIsNotTheLastQuestion;
+  }
+
+  isAnswerSubmitButtonActive() {
+    return !!this.gameService.selectedOptionForCurrentQuestion;
   }
 
   gotoNextQuestion() {
-    this.gameService.currentQuestionNumber++;
+    this.gameService.selectNextQuestion();
     this.loadQuestion();
   }
 
@@ -35,5 +35,9 @@ export class QuizComponent {
     this.router.navigate([this.gameService.currentQuestionNumber], {
       relativeTo: this.route,
     });
+  }
+
+  submitQuiz() {
+
   }
 }
