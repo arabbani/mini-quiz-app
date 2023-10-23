@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { QuizRoutingModule } from './quiz-routing.module';
 import { QuizComponent } from './quiz.component';
+import { QuestionComponent } from './question/question.component';
 
 
 @NgModule({
   declarations: [
-    QuizComponent
+    QuizComponent,
+    QuestionComponent
   ],
   imports: [
     CommonModule,
