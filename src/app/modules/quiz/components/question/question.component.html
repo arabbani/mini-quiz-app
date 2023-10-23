@@ -1,14 +1,22 @@
 <div
   *ngIf="question"
-  class="gap-3 d-flex flex-column align-items-center text-body-secondary"
+  class="gap-2 d-flex flex-column text-body-secondary"
 >
-  <p class="fs-2 text-center">{{ question.question }}</p>
-  <div class="row">
+  <p class="fs-2">{{ question.question }}</p>
+  <div class="d-flex flex-column">
     <div
-      class="col-6 form-check fs-3"
+      class="form-check fs-3"
       *ngFor="let option of question.options; index as i"
     >
-      <input class="form-check-input" type="radio" name="option" value="{{ option }}" id="{{ i }}" [checked]="answer === option" (change)="handleOptionCLick($event)" />
+      <input
+        class="form-check-input"
+        type="radio"
+        name="option"
+        value="{{ option }}"
+        id="{{ i }}"
+        [checked]="answer === option"
+        (change)="handleOptionCLick($event)"
+      />
       <label class="form-check-label" for="{{ i }}">
         {{ option }}
       </label>

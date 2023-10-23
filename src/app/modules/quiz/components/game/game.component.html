@@ -1,6 +1,6 @@
-<div class="h-75 d-flex flex-column justify-content-center">
+<div class="h-100 d-flex flex-column justify-content-center gap-3">
   <router-outlet></router-outlet>
-  <div class="gap-3 d-flex justify-content-center mt-4">
+  <div class="gap-3 d-flex mt-4">
     <button *ngIf="!isCurrentQuestionIsTheLastQuestion()" class="btn btn-secondary" (click)="submitAnswer()" [disabled]="!isAnswerSubmitButtonActive()">Next</button>
     <button *ngIf="isCurrentQuestionIsTheLastQuestion()" class="btn btn-primary" [disabled]="!isAnswerSubmitButtonActive()" (click)="submitAnswer()">Submit</button>
   </div>
